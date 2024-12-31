@@ -9,7 +9,7 @@ const BLOG = {
   NEXT_REVALIDATE_SECOND: process.env.NEXT_PUBLIC_REVALIDATE_SECOND || 5, 
   // コンテンツ更新のキャッシュ間隔（秒単位）。例: 5秒間は完全な静的状態で、データを再取得しない
   // この値を大きくすると Vercel のリソースを節約し、アクセス速度を向上させるが、記事更新の遅延を引き起こす
-  THEME: process.env.NEXT_PUBLIC_THEME || 'simple', 
+  THEME: process.env.NEXT_PUBLIC_THEME || 'example', 
   // 現在のテーマ。`themes` フォルダ内にあるテーマを指定可能
   // 例: example, fukasawa, gitbook, heo, hexo, landing, matery, medium, next, nobelium, plog, simple
   THEME_SWITCH: process.env.NEXT_PUBLIC_THEME_SWITCH || 'false', 
