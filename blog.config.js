@@ -12,7 +12,7 @@ const BLOG = {
   THEME: process.env.NEXT_PUBLIC_THEME || 'example', 
   // 現在のテーマ。`themes` フォルダ内にあるテーマを指定可能
   // 例: example, fukasawa, gitbook, heo, hexo, landing, matery, medium, next, nobelium, plog, simple
-  THEME_SWITCH: process.env.NEXT_PUBLIC_THEME_SWITCH || 'false', 
+  THEME_SWITCH: process.env.NEXT_PUBLIC_THEME_SWITCH || false, 
   // テーマ切り替えボタンを表示するかどうか
   LANG: process.env.NEXT_PUBLIC_LANG || 'jp-JP', 
   // 言語設定。例: 'zh-CN', 'en-US'。詳細は `/lib/lang.js` を参照
