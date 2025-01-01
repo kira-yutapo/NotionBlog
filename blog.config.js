@@ -1,47 +1,28 @@
-// 注: process.env.XX は Vercel の環境変数です。設定方法はこちらを参照してください：https://docs.tangly1024.com/article/how-to-config-notion-next#c4768010ae7d44609b744e79e2f9959a
+// 注: process.env.XX是Vercel的环境变量，配置方式见：https://docs.tangly1024.com/article/how-to-config-notion-next#c4768010ae7d44609b744e79e2f9959a
 const BLOG = {
-  // 重要なページID！！！テンプレートの複製元: https://www.notion.so/tanghh/02ab3b8678004aa69e9e415905ef32a5
+  // Important page_id！！！Duplicate Template from  https://www.notion.so/tanghh/02ab3b8678004aa69e9e415905ef32a5
   NOTION_PAGE_ID:
     process.env.NOTION_PAGE_ID ||
     '02ab3b8678004aa69e9e415905ef32a5,en:7c1d570661754c8fbc568e00a01fd70e',
-  PSEUDO_STATIC: process.env.NEXT_PUBLIC_PSEUDO_STATIC || false, 
-  // 擬似静的パス: 有効にするとすべての記事URLが `.html` で終わる
-  NEXT_REVALIDATE_SECOND: process.env.NEXT_PUBLIC_REVALIDATE_SECOND || 5, 
-  // コンテンツ更新のキャッシュ間隔（秒単位）。例: 5秒間は完全な静的状態で、データを再取得しない
-  // この値を大きくすると Vercel のリソースを節約し、アクセス速度を向上させるが、記事更新の遅延を引き起こす
-  THEME: process.env.NEXT_PUBLIC_THEME || 'simple', 
-  // 現在のテーマ。`themes` フォルダ内にあるテーマを指定可能
-  // 例: example, fukasawa, gitbook, heo, hexo, landing, matery, medium, next, nobelium, plog, simple
-  THEME_SWITCH: process.env.NEXT_PUBLIC_THEME_SWITCH || false, 
-  // テーマ切り替えボタンを表示するかどうか
-  LANG: process.env.NEXT_PUBLIC_LANG || 'jp-JP', 
-  // 言語設定。例: 'zh-CN', 'en-US'。詳細は `/lib/lang.js` を参照
-  SINCE: process.env.NEXT_PUBLIC_SINCE || 2025, 
-  // サイトの運営開始年。この値を空にすると現在の年が使用される
-  APPEARANCE: process.env.NEXT_PUBLIC_APPEARANCE || 'light', 
-  // 外観モード。例: ['light', 'dark', 'auto']
-  // `light`: 昼モード、`dark`: 夜モード、`auto`: 時間やテーマによって自動で切り替え
-  APPEARANCE_DARK_TIME: process.env.NEXT_PUBLIC_APPEARANCE_DARK_TIME || [18, 6], 
-  // 夜モードの有効時間。無効にする場合は `false` を設定
-};
+  PSEUDO_STATIC: process.env.NEXT_PUBLIC_PSEUDO_STATIC || false, // 伪静态路径，开启后所有文章URL都以 .html 结尾。
+  NEXT_REVALIDATE_SECOND: process.env.NEXT_PUBLIC_REVALIDATE_SECOND || 5, // 更新内容缓存间隔 单位(秒)；即每个页面有5秒的纯静态期、此期间无论多少次访问都不会抓取notion数据；调大该值有助于节省Vercel资源、同时提升访问速率，但也会使文章更新有延迟。
+  THEME: process.env.NEXT_PUBLIC_THEME || 'example', // 当前主题，在themes文件夹下可找到所有支持的主题；主题名称就是文件夹名，例如 example,fukasawa,gitbook,heo,hexo,landing,matery,medium,next,nobelium,plog,simple
+  THEME_SWITCH: process.env.NEXT_PUBLIC_THEME_SWITCH || false, // 是否显示切换主题按钮
+  LANG: process.env.NEXT_PUBLIC_LANG || 'jp-JP', // e.g 'zh-CN','en-US'  see /lib/lang.js for more.
+  SINCE: process.env.NEXT_PUBLIC_SINCE || 2025, // e.g if leave this empty, current year will be used.
+  APPEARANCE: process.env.NEXT_PUBLIC_APPEARANCE || 'light', // ['light', 'dark', 'auto'], // light 日间模式 ， dark夜间模式， auto根据时间和主题自动夜间模式
+  APPEARANCE_DARK_TIME: process.env.NEXT_PUBLIC_APPEARANCE_DARK_TIME || [18, 6], // 夜间模式起至时间，false时关闭根据时间自动切换夜间模式
 
-module.exports = BLOG;
+  TAG_SORT_BY_COUNT: true, // 标签是否按照文章数量倒序排列，文章多的标签排在前。
+  IS_TAG_COLOR_DISTINGUISHED:
+    process.env.NEXT_PUBLIC_IS_TAG_COLOR_DISTINGUISHED === 'true' || true, // 对于名称相同的tag是否区分tag的颜色
 
-TAG_SORT_BY_COUNT: true, 
-// タグを記事数に基づいて降順に並べるかどうか。記事数が多いタグが前に表示される。
-IS_TAG_COLOR_DISTINGUISHED:
-  process.env.NEXT_PUBLIC_IS_TAG_COLOR_DISTINGUISHED === 'true' || true, 
-// 同じ名前のタグに対して色を区別するかどうか。
+  // 3.14.1版本后，欢迎语在此配置，英文逗号隔开 ,  即可支持多个欢迎语打字效果。
+  GREETING_WORDS:
+    process.env.NEXT_PUBLIC_GREETING_WORDS ||
+    '',
 
-// バージョン3.14.1以降、挨拶メッセージはここで設定します。
-// 英文のカンマ `,` で区切ることで、複数の挨拶メッセージがタイピングエフェクトとして表示可能。
-GREETING_WORDS:
-  process.env.NEXT_PUBLIC_GREETING_WORDS || '',
-
-// カスタムメニュー設定
-CUSTOM_MENU: process.env.NEXT_PUBLIC_CUSTOM_MENU || false, 
-// `Menu` タイプをサポート。バージョン3.12.0以降、各テーマで柔軟な二次メニュー設定を順次サポートする予定。
-// 従来の `Page` タイプに代わるもの。この設定は試験機能で、デフォルトでは無効。
+  CUSTOM_MENU: process.env.NEXT_PUBLIC_CUSTOM_MENU || false, // 支持Menu 类型，从3.12.0版本起，各主题将逐步支持灵活的二级菜单配置，替代了原来的Page类型，此配置是试验功能、默认关闭。
 
   AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || 'きらりんご', // 著者のニックネーム 例: tangly1024
   BIO: process.env.NEXT_PUBLIC_BIO || 'ネットの隅に生息しているハリネズミ', // 著者の自己紹介
@@ -597,3 +578,4 @@ VERSION: (() => {
 }
 
 module.exports = BLOG
+
